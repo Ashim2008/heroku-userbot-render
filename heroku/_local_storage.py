@@ -139,22 +139,27 @@ class RemoteStorage:
         return url, repo, module_name
 
     async def fetch(self, url: str, auth: typing.Optional[str] = None) -> str:
-        """
-        Fetches the module from the remote storage.
-        :param url: URL to the module.
-        :param auth: Optional authentication string in the format "username:password".
-        :return: Module source code.
-        """
-        url, repo, module_name = self._parse_url(url)
-        try:
-            r = await utils.run_sync(
+    """
+    Fetches the module from the remote storage.
+    :param url: URL to the module.
+    :param auth: Optional authentication string in the format "username:password".
+    :return: Module source code.
+    """
+    url, repo, module_name = self._parse_url(url)
+
+# Get git hash and ensure it's a string for HTTP headers
+git_hash = utils.get_git_hash()
+commit_sha = str(git_hash) if git_hash else "unknown"
+
+try:
+    r = await utils.run_sync(
                 requests.get,
                 url,
                 auth=(tuple(auth.split(":", 1)) if auth else None),
                 headers={
                     "User-Agent": "Heroku Userbot",
                     "X-Heroku-Version": ".".join(map(str, __version__)),
-                    "X-Heroku-Commit-SHA": utils.get_git_hash(),
+                    "X-Heroku-Commit-SHA": commit_sha,
                     "X-Heroku-User": str(self._client.tg_id),
                 },
             )
