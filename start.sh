@@ -29,12 +29,6 @@ fi
 
 echo "✅ Git setup complete"
 
-# Очищаем старые сессии
-rm -f *.session
-rm -f heroku-*.session
-
-echo "🧹 Cleaned old sessions"
-
 # Запускаем приложение
 echo "▶️ Starting userbot..."
 python -m heroku --port ${PORT:-80}
