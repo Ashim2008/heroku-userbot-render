@@ -62,7 +62,7 @@ def self_ping():
     """Функция для самопинга каждые 5 минут"""
     while True:
         try:
-            time.sleep(300)  # 5 минут
+            time.sleep(200)  # 5 минут
             
             # Для Render.com
             render_url = os.environ.get('RENDER_EXTERNAL_URL')
