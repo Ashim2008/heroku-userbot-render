@@ -1013,7 +1013,7 @@ class Heroku:
         """Периодический heartbeat для поддержания активности"""
         while True:
             try:
-                await asyncio.sleep(300)  # 5 минут
+                await asyncio.sleep(200)  # 5 минут
                 logging.info("💓 Heartbeat - bot is alive")
             except Exception as e:
                 logging.error(f"Heartbeat error: {e}")
