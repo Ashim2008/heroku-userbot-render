@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Копируем файлы требований из render-deploy
-COPY render-deploy/requirements.txt ./requirements.txt
+COPY requirements.txt ./requirements.txt
 
 # Устанавливаем Python зависимости
 RUN pip install --no-cache-dir -r requirements.txt
@@ -46,10 +46,10 @@ ENV GIT_PYTHON_REFRESH=quiet
 ENV FFMPEG_BINARY=/usr/bin/ffmpeg
 
 # Делаем render-deploy/start.sh исполняемым
-RUN chmod +x render-deploy/start.sh
+RUN chmod +x start.sh
 
 # Открываем порты
 EXPOSE 10000
 
 # Команда запуска - используем обновленный скрипт
-CMD ["bash", "render-deploy/start.sh"]
+CMD ["bash", "start.sh"]
