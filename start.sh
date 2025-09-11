@@ -29,6 +29,18 @@ fi
 
 echo "✅ Git setup complete"
 
+# Очищаем старые сессии
+rm -f *.session
+rm -f heroku-*.session
+
+echo "🧹 Cleaned old sessions"
+
 # Запускаем приложение
 echo "▶️ Starting userbot..."
-python -m heroku --port ${PORT:-80}
+# Для Render.com используем переменную PORT
+if [ ! -z "$RENDER" ] || [ ! -z "$RENDER_SERVICE_NAME" ] || [ ! -z "$RENDER_EXTERNAL_URL" ]; then
+    echo "🌐 Detected Render.com environment"
+    python -m heroku --port ${PORT:-80}
+else
+    python -m heroku --port ${PORT:-80}
+fi
