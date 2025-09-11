@@ -260,11 +260,16 @@ def gen_port(cfg: str = "port", no8080: bool = False) -> int:
     Generates random free port in case of VDS.
     In case of Docker, also return 8080, as it's already exposed by default.
     For Replit, always use port 5000.
+    For Render.com, use PORT env var or default to 80.
     :returns: Integer value of generated port
     """
     # Force port 5000 for Replit environment
     if os.environ.get("REPLIT_DEPLOYMENT") or "replit" in os.environ.get("USER", "").lower():
         return 5000
+    
+    # Force PORT env var for Render.com environment  
+    if any(env_var in os.environ for env_var in ["RENDER", "RENDER_SERVICE_NAME", "RENDER_EXTERNAL_URL"]):
+        return int(os.environ.get("PORT", 80))
     
     if "DOCKER" in os.environ and not no8080:
         return 8080
