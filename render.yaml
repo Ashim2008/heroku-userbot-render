@@ -3,7 +3,7 @@ services:
     name: heroku-userbot
     env: docker
     plan: free
-    dockerfilePath: render-deploy/Dockerfile
+    dockerfilePath: Dockerfile
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
