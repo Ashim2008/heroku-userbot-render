@@ -1,0 +1,17 @@
+heroku-tl-new==1.1.3
+pycloudflared==0.2.0
+Pillow
+Flask
+requests
+
+# Voice chat dependencies for VoiceChatNative module
+pyrogram>=2.0.106
+py-tgcalls>=1.1.3
+yt-dlp>=2024.8.6
+aiohttp>=3.8.0
+ffmpeg-python>=0.2.0
+tgcrypto>=1.2.0
+
+# Additional stability
+wheel
+setuptools
